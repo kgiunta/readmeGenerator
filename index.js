@@ -1,81 +1,135 @@
-// TODO: Include packages needed for this application
-
+const inquirer = require("inquirer");
+const fs = require("fs");
+// function checkInput(input) {
+//   if (input.length > 0) {
+//     return true;
+//   } else {
+//     return "This line can not be empty";
+//   }
+// }
 // TODO: Create an array of questions for user input
-const questions = [];
-// What is the name of your project?
-// const projectTitle =
+// const questions = () ;
+return inquirer
+  .prompt([
+    {
+      type: "input",
+      message: "What is the name of your project?",
+      name: "projectTitle",
+      //   validate: checkInput(),
+    },
+    {
+      type: "input",
+      message: "Please Provide a description of your project:",
+      name: "description",
+      validate: (input) => {
+        if (input.length > 0) {
+          return true;
+        } else {
+          return "This line can not be empty";
+        }
+      },
+    },
+    {
+      type: "input",
+      message: "Please provide your installation instructions:",
+      name: "installation",
+    },
+    {
+      type: "list",
+      message: "Chose the appropriate license for this project:",
+      name: "license",
+      choices: ["Academic", "GNU", "ISC", "MIT", "Mozilla", "Open"],
+    },
+    {
+      type: "input",
+      message: "Did anyone help with this project?",
+      name: "credits",
+    },
+    {
+      type: "input",
+      message: "How would you like users to contribute to this application?",
+      name: "contributing",
+    },
+    {
+      type: "input",
+      message: "Please provide your GitHub username:",
+      name: "username",
+    },
 
-// Please Provide a description of your project
-// const description =
+    {
+      type: "input",
+      message: "Please provide your E-mail address:",
+      name: "eMail",
+    },
+  ])
+  .then((response) => {
+    console.log(response);
 
-//  "Chose the appropriate license for this project: ",
+    // use response variable to build string
+    const readMeString = buildReadMe(response);
+    fs.appendFile("README.md", readMeString, {}, (err) => {
+      console.log(err);
+    });
+  });
+/**
+ * This takes an object an returns a string
+ * @param {Object} response
+ * @returns
+ */
+function buildReadMe(response) {
+  return `# ${response.projectTitle}
 
-//                 "Academic",
-//                 "GNU",
-//                 "ISC",
-//                 "MIT",
-//                 "Mozilla",
-//                 "Open"
+    ## Description;
+   
+    ${response.description}
+   
+    ## Table of Contents
+   
+    Below are the table of contents for this application:
+   
+   - [Installation](#installation)
+    - [Usage](#usage)
+    - [Contributing](#contributing)
+    - [Tests](#tests)
+    - [License](#license)
+    - [Questions](#questions)
+   
+    ## Installation
+   
+   Below are the instructions for the installation process of this project:
+   ${response.installation}
+   
+   ## Usage
+   
+   Provide instructions and examples for use. Include screenshots as needed.
+   
+    To add a screenshot, create an "assets/images" folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
+   
+   ## Contributing
+   
+   Please see the following ways to contribute to this application via the developer's request:
+   ${response.contributing}
+   
+   ## License
+   
+   This project is based around the following license: ${response.license} <br/>
+   Please respect all aspects of this license.
+   
+   ---
+   
+   ## Questions
+   
+   For any questions regarding this project please feel free to each out to me on GitHub @ https:github.com/${response.username} or contact me personally via E-mail: ${response.eMail}`;
+}
 
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
-// fs.appendFile('README.md', `${process.argv[2]}\n`, (err)
+// //   usage information, contribution guidelines, and test instructions
+// // TODO: Create a function to write README file
+// // function writeToFile(fileName, data) {}
 
-// TODO: Create a function to initialize app
-function init() {}
+// // fs.appendFile('README.md', `${process.argv[2]}\n`, (err)
 
-// Function call to initialize app
-init();
+// // TODO: Create a function to initialize app
+// // function init() {}
 
-// # ${projectTitle}
-/* <Your-Project-Title> */
-
-// ## Description
-
-// ${description}
-//
-
-// ## Table of Contents
-
-// Below are the table of contents for this application:
-
-// - [Installation](#installation)
-// - [Usage](#usage)
-// - [Credits](#credits)
-// - [License](#license)
-
-// ## Installation
-
-// What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
-
-// ## Usage
-
-// Provide instructions and examples for use. Include screenshots as needed.
-
-// To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
-
-//     ```md
-//     ![alt text](assets/images/screenshot.png)
-//     ```
-
-// ## Credits
-
-// List your collaborators, if any, with links to their GitHub profiles.
-
-// If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
-
-// If you followed tutorials, include links to those here as well.
-
-// ## License
-
-// The last section of a high-quality README file is the license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, refer to [https://choosealicense.com/](https://choosealicense.com/).
-
-// ---
-
-// 🏆 The previous sections are the bare minimum, and your project will ultimately determine the content of this document. You might also want to consider adding the following sections.
-
-// ## Badges
-
-// ## Features
-
-// If your project has a lot of features, list them here.
+// // // Function call to initialize app
+// // init();
