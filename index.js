@@ -52,6 +52,11 @@ return inquirer
     },
     {
       type: "input",
+      message: "What testing has this application undergone?",
+      name: "tests",
+    },
+    {
+      type: "input",
       message: "Please provide your GitHub username:",
       name: "username",
     },
@@ -79,57 +84,49 @@ return inquirer
 function buildReadMe(response) {
   return `# ${response.projectTitle}
 
-    ## Description;
+## Description
    
     ${response.description}
    
-    ## Table of Contents
+## Table of Contents
    
     Below are the table of contents for this application:
    
-   - [Installation](#installation)
-    - [Usage](#usage)
-    - [Contributing](#contributing)
-    - [Tests](#tests)
-    - [License](#license)
-    - [Questions](#questions)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [Tests](#tests)
+- [License](#license)
+- [Questions](#questions)
    
-    ## Installation
+## Installation
    
-   Below are the instructions for the installation process of this project:
+        Below are the instructions for the installation process of this project:
    ${response.installation}
    
-   ## Usage
+## Usage
    
    Provide instructions and examples for use. Include screenshots as needed.
    
     To add a screenshot, create an "assets/images" folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
    
-   ## Contributing
+## Contributing
    
-   Please see the following ways to contribute to this application via the developer's request:
-   ${response.contributing}
+    Please see the following ways to contribute to this application via the developer's request:
+    ${response.contributing}
+
+## Tests
+    This application has undergone the following tests:
+    ${response.tests}
    
-   ## License
+## License
    
-   This project is based around the following license: ${response.license} <br/>
-   Please respect all aspects of this license.
+    This project is based around the following license: ${response.license} 
+    Please respect all aspects of this license.
    
    ---
    
-   ## Questions
+## Questions
    
-   For any questions regarding this project please feel free to each out to me on GitHub @ https:github.com/${response.username} or contact me personally via E-mail: ${response.eMail}`;
+    For any questions regarding this project please feel free to each out to me on GitHub @ https://github.com/${response.username} or contact me personally via E-mail: ${response.eMail}`;
 }
-
-// //   usage information, contribution guidelines, and test instructions
-// // TODO: Create a function to write README file
-// // function writeToFile(fileName, data) {}
-
-// // fs.appendFile('README.md', `${process.argv[2]}\n`, (err)
-
-// // TODO: Create a function to initialize app
-// // function init() {}
-
-// // // Function call to initialize app
-// // init();
