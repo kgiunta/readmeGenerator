@@ -1,12 +1,12 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
-// function checkInput(input) {
-//   if (input.length > 0) {
-//     return true;
-//   } else {
-//     return "This line can not be empty";
-//   }
-// }
+function checkInput(input) {
+  if (input.length > 0) {
+    return true;
+  } else {
+    return "This line can not be empty";
+  }
+}
 // TODO: Create an array of questions for user input
 // const questions = () ;
 return inquirer
@@ -15,56 +15,57 @@ return inquirer
       type: "input",
       message: "What is the name of your project?",
       name: "projectTitle",
-      //   validate: checkInput(),
+      validate: checkInput,
     },
     {
       type: "input",
       message: "Please Provide a description of your project:",
       name: "description",
-      validate: (input) => {
-        if (input.length > 0) {
-          return true;
-        } else {
-          return "This line can not be empty";
-        }
-      },
+      validate: checkInput,
     },
     {
       type: "input",
       message: "Please provide your installation instructions:",
       name: "installation",
+      validate: checkInput,
     },
     {
       type: "list",
       message: "Chose the appropriate license for this project:",
       name: "license",
       choices: ["Academic", "GNU", "ISC", "MIT", "Mozilla", "Open"],
+      validate: checkInput,
     },
     {
       type: "input",
       message: "Did anyone help with this project?",
       name: "credits",
+      validate: checkInput,
     },
     {
       type: "input",
       message: "How would you like users to contribute to this application?",
       name: "contributing",
+      validate: checkInput,
     },
     {
       type: "input",
       message: "What testing has this application undergone?",
       name: "tests",
+      validate: checkInput,
     },
     {
       type: "input",
       message: "Please provide your GitHub username:",
       name: "username",
+      validate: checkInput,
     },
 
     {
       type: "input",
       message: "Please provide your E-mail address:",
       name: "eMail",
+      validate: checkInput,
     },
   ])
   .then((response) => {
@@ -82,17 +83,20 @@ return inquirer
  * @returns
  */
 function buildReadMe(response) {
-  return `# ${response.projectTitle}
+  return `# ${response.projectTitle} 
+![${response.license}](https://img.shields.io/badge/${response.license}-Badge-blue)  
 
 ## Description
    
     ${response.description}
+    
    
 ## Table of Contents
    
     Below are the table of contents for this application:
    
 - [Installation](#installation)
+- [Badges](#badges)
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [Tests](#tests)
@@ -103,7 +107,8 @@ function buildReadMe(response) {
    
         Below are the instructions for the installation process of this project:
    ${response.installation}
-   
+
+
 ## Usage
    
    Provide instructions and examples for use. Include screenshots as needed.
