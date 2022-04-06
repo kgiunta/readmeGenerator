@@ -26,9 +26,9 @@ Please see this application on Github.com/kgiunta
 
 ## Usage
 
-Provide instructions and examples for use. Include screenshots as needed.
+The link below provides the usage of this application via youtube:
 
-    To add a screenshot, create an "assets/images" folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
+https://www.youtube.com/watch?v=XlULbDzYQBU
 
 ## Contributing
 
